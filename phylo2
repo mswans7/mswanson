@@ -1,0 +1,50 @@
+from __future__ import division
+
+max= input("What is the maximum value?: ")
+min = input("What is the minimum value?: ")
+#1
+
+def phylo(max, min):
+	repeat = max - min
+	repeat = repeat
+	total = 1
+	for i in range(repeat):
+		total = total * max
+		max = max - 1
+	return(total)
+	
+#2A
+def replacementslow(max, min):
+	numerator = phylo(max, min)
+	min = min
+	denominator = 1
+	for i in range(min):
+		denominator = min * denominator
+		min = min-1
+	answer = numerator/denominator
+	return(answer)
+	
+print replacementslow(max, min)
+
+#2B
+
+max= input("What is the maximum value?: ")
+min = input("What is the minimum value?: ")
+
+def replacementfast(max,min):
+	numerator = 1
+	for i in range(min):
+		numerator = max * numerator
+		max = max - 1
+	
+	denominator = 1
+	for i in range(min):
+		denominator = min * denominator
+		min = min - 1
+	total = numerator/denominator
+	return(str(total))
+	
+print replacementfast(max, min)
+
+#3
+# I didn't notice any particular differences in time, but 2B can complete computations with much larger numbers than 2A can.
