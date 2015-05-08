@@ -48,3 +48,108 @@ print replacementfast(max, min)
 
 #3
 # I didn't notice any particular differences in time, but 2B can complete computations with much larger numbers than 2A can.
+
+#4 
+def bernoulli(p):
+
+#1 This function multiples all consecutive numbers between the user designated maximum and minimum values.
+
+def phylo(max, min):
+	repeat = max - min + 1
+	total = 1
+	for i in range(repeat):
+		total = total * max
+		max = max - 1
+	return(total)
+	
+print(phylo(max, min))
+
+#!/usr/bin/python
+
+from __future__ import division
+
+max = input("What is the maximum value?: ")
+min = input("What is the minimum value?: ")
+
+
+#2A This utilizes the previous phylo function to calculate a binomial with all of the factorials intact. Should be slower than what I write for 2B
+
+def phylo(max, min):
+	repeat = max - min + 1
+	total = 1
+	for i in range(repeat):
+		total = total * max
+		max = max - 1
+	return(total)
+
+total = phylo(max, min)
+denominator = 1
+for i in range(min):
+	denominator = min * denominator
+	min = min - 1
+	
+binomial = total // denominator
+
+print binomial
+	
+#2B This utilizes the previous phylo function to calculate a binomial and eliminates all of the unnecessary factorials.
+
+#!/usr/bin/python
+from __future__ import division
+max = input("What is the maximum value?: ")
+min = input("What is the minimum value?: ")
+
+def phylo(max, min):
+	total = 1
+	min = min + 1
+	for i in range(min):
+		total = total * max
+		max = max - 1
+	return(total)
+
+numerator = phylo(max, min)
+
+denominator = 1
+for i in range(min):
+	denominator = min * denominator
+	min = min - 1
+	
+binomial = numerator // denominator
+
+print binomial
+
+#3 2B seems to be at least 8 times faster than 2A since it eliminates the computationally intensive factorials.
+
+#4 This function generates a binomial power mass function given n, k, and p.
+
+#!/usr/bin/python
+from __future__ import division
+max = input("What is the maximum value?: ")
+min = input("What is the minimum value?: ")
+p = input("What is the probability?: ")
+
+def phylo(max, min, p):
+	total = 1
+	temp_min = min + 1
+	temp_max = max
+	for i in range(temp_min):
+		total = total * temp_max
+		temp_max = temp_max - 1
+	denominator = 1
+	temp_min = min
+	for i in range(min):
+		denominator = temp_min * denominator
+		temp_min = temp_min - 1
+	binomial = total // denominator
+	middle = pow(p,min)
+	x = 1-p
+	y = max-min
+	last = pow(x,y)
+	print binomial
+	print middle
+	print last
+	final = binomial * middle * last
+	return(final)
+
+print(phylo(max, min, p))
+
